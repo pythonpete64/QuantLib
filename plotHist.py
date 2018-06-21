@@ -5,21 +5,25 @@ from util import get_data, plot_data, compute_daily_returns
 def run():
     """read data"""
     dates = pd.date_range('2016-01-01', '2018-06-01')
-    symbols = ['BTCUSD']
+    symbols = ['ETHUSD']
     df = get_data(symbols, dates)
-    plot_data(df, "Bitcoin price")
 
     """compute daily returns"""
     dailyReturns = compute_daily_returns(df)
-    plot_data(dailyReturns, "Bitcoin Daily Returns")
-
-    dailyReturns.hist(bins=80)
-    plt.show()
+    dailyReturns.hist(bins=20)
 
     mean = dailyReturns.mean()
-    print("Mean: "+str(mean))
     std = dailyReturns.std()
-    print("standard dev : "+str(std))
+    kurtosis = dailyReturns.kurtosis()
+    print("Mean:"+ dailyReturns.mean().to_string().split(' ', 1)[1])
+    print("standard dev:"+ dailyReturns.std().to_string().split(' ', 1)[1])
+    print("kurtosis:"+ dailyReturns.kurtosis().to_string().split(' ', 1)[1])
+
+
+    plt.axvline(float(mean), color='w', linestyle='dashed', linewidth=2)
+    plt.axvline(float(std), color='r', linestyle='dashed', linewidth=2)
+    plt.axvline(float(-std), color='r', linestyle='dashed', linewidth=2)
+    plt.show()
 
 
 

@@ -71,7 +71,7 @@ def scatter_abc(_df):
     # some of the fields have NA values for now ill just drop them but this
     # is not a robust solution as i dont even know where they are in the data
     # set
-    # TODO: FIX
+    # TODO: unit tests on this. i dont think its giving accurate results
 
     tickers = list(_df.columns.values)
     xTick=str(tickers[0])
